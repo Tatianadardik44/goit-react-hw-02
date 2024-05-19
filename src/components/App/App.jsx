@@ -7,14 +7,14 @@ import Notification from '../Notification/Notification';
 import Description from '../Description/Description';
 
   const createLocalState = () => {
-    const localState = localStorage.getItem('key');
+    const localState = localStorage.getItem('feedback');
    
-    return localState ? JSON.parse(localState) : 0
+    return localState ? JSON.parse(localState) : { good: 0, neutral: 0, bad: 0 }
   }
 function App() {
   const [state, setState] = useState(createLocalState())
   useEffect(() => {
-   localStorage.setItem('key', JSON.stringify(state)
+   localStorage.setItem('feedback', JSON.stringify(state)
 
   )}, [state])
   
