@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 
-import './App.css'
-import Options from './Options'
-import Feedback from './Feedback'
-import Notification from './Notification';
+import css from './App.module.css'
+import Options from '../Options/Options'
+import Feedback from '../Feedback/Feedback'
+import Notification from '../Notification/Notification';
 
   const createLocalState = (key) => {
     const localState = localStorage.getItem(key);
@@ -32,9 +32,9 @@ function App() {
   const positiveFeedback  = Math.round((state.good / totalFeedback) * 100);
   return (
     <>
-      <div>
-        <h1>Sip Happens Café</h1>
-        <p>Please leave your feedback about our service by selecting one of the options below.</p>
+      <div className={css.mainBox}>
+        <h1 className={css.mainTitle}>Sip Happens Café</h1>
+        <p className={css.title}>Please leave your feedback about our service by selecting one of the options below.</p>
         <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} hendleReset={hendleReset}  /> 
         {totalFeedback ? <Feedback state={state} totalFeedback={  totalFeedback } positiveFeedback ={positiveFeedback  }/>:<Notification/>}
       </div>  
