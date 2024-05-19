@@ -8,7 +8,8 @@ import Description from '../Description/Description';
 
   const createLocalState = () => {
     const localState = localStorage.getItem('key');
-    return localState ? JSON.parse(localState) : { good: 0, neutral: 0, bad: 0 }
+   
+    return localState ? JSON.parse(localState) : 0
   }
 function App() {
   const [state, setState] = useState(createLocalState())
