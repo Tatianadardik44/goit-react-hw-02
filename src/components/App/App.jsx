@@ -4,22 +4,18 @@ import css from './App.module.css'
 import Options from '../Options/Options'
 import Feedback from '../Feedback/Feedback'
 import Notification from '../Notification/Notification';
+import Description from '../Description/Description';
 
-  const createLocalState = (key) => {
-    const localState = localStorage.getItem(key);
-    return localState ? JSON.parse(localState) : 0
+  const createLocalState = () => {
+    const localState = localStorage.getItem('key');
+    return localState ? JSON.parse(localState) : { good: 0, neutral: 0, bad: 0 }
   }
 function App() {
-  const [state, setState] = useState({
-     good: createLocalState('good'),
-     neutral: createLocalState('neutral'),
-     bad: createLocalState('bad')
-  })
+  const [state, setState] = useState(createLocalState())
   useEffect(() => {
-   localStorage.setItem('good', JSON.stringify(state.good));
-    localStorage.setItem('neutral', JSON.stringify(state.neutral));
-    localStorage.setItem('bad', JSON.stringify(state.bad));
-  }, [state])
+   localStorage.setItem('key', JSON.stringify(state)
+
+  )}, [state])
   
   const updateFeedback = (feedbackType) => {
     setState({...state, [feedbackType]: state[feedbackType] + 1})
@@ -33,8 +29,7 @@ function App() {
   return (
     <>
       <div className={css.mainBox}>
-        <h1 className={css.mainTitle}>Sip Happens Café</h1>
-        <p className={css.title}>Please leave your feedback about our service by selecting one of the options below.</p>
+        <Description />
         <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} hendleReset={hendleReset}  /> 
         {totalFeedback ? <Feedback state={state} totalFeedback={  totalFeedback } positiveFeedback ={positiveFeedback  }/>:<Notification/>}
       </div>  
